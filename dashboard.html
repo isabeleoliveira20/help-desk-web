@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | Help Desk</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main class="container">
+    <h2>Chamados Registrados</h2>
+
+    <table border="1" width="100%">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Categoria</th>
+          <th>Prioridade</th>
+          <th>Status</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody id="lista-chamados"></tbody>
+    </table>
+  </main>
+
+  <script>
+    const tabela = document.getElementById("lista-chamados");
+    const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+
+    if (chamados.length === 0) {
+      tabela.innerHTML = "<tr><td colspan='5'>Nenhum chamado encontrado</td></tr>";
+    } else {
+      chamados.forEach(c => {
+        tabela.innerHTML += `
+          <tr>
+            <td>${c.titulo}</td>
+            <td>${c.categoria}</td>
+            <td>${c.prioridade}</td>
+            <td>${c.status}</td>
+            <td>${c.data}</td>
+          </tr>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
